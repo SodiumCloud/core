@@ -5,6 +5,10 @@
   "author": "",
   "private": true,
   "license": "UNLICENSED",
+  "engines": {
+    "npm": "please use yarn",
+    "yarn": ">= 1.22.0"
+  },
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
@@ -23,6 +27,7 @@
   "dependencies": {
     "@nestjs/common": "^7.0.0",
     "@nestjs/core": "^7.0.0",
+    "@nestjs/mapped-types": "^0.1.0",
     "@nestjs/platform-express": "^7.0.0",
     "@nestjs/platform-fastify": "^7.4.4",
     "@nestjs/swagger": "^4.6.1",
