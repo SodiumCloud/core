@@ -5,10 +5,6 @@
   "author": "",
   "private": true,
   "license": "UNLICENSED",
-  "engines": {
-    "npm": "please use yarn",
-    "yarn": ">= 1.22.0"
-  },
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
@@ -59,11 +55,7 @@
     "typescript": "^3.7.4"
   },
   "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "ts"
-    ],
+    "moduleFileExtensions": ["js", "json", "ts"],
     "rootDir": "src",
     "testRegex": ".spec.ts$",
     "transform": {
