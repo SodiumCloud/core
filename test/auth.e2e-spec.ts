@@ -2,10 +2,10 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication, HttpStatus } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
-import { RegisterUserDto } from 'src/auth/dto/register-user.dto';
-import { LoginUserDto } from 'src/auth/dto/login-user.dto';
+import { RegisterUserDto } from './../src/auth/dto/register-user.dto';
+import { LoginUserDto } from './../src/auth/dto/login-user.dto';
 
-//prettier-ignore
+// prettier-ignore
 {//Register
 var Ruser1: RegisterUserDto = {username: 'username1', password: 'password1', email: 'email@email.com',};
 var Ruser2: RegisterUserDto = {username: undefined,   password: 'password2', email: 'email@email.com',};
