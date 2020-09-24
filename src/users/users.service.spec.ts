@@ -36,7 +36,7 @@ describe('UsersService', () => {
           provide: getRepositoryToken(User),
           useValue: {
             find: jest.fn().mockResolvedValue(usersArray),
-            findOneOrFail: jest.fn().mockResolvedValue(usersArray[1]),
+            findOne: jest.fn().mockResolvedValue(usersArray[1]),
             save: jest.fn(),
             create: jest.fn().mockReturnValue(usersArray[1]),
             update: jest.fn().mockReturnValue(true),
@@ -60,14 +60,14 @@ describe('UsersService', () => {
   });
 
   it('getOneById', async () => {
-    const repoSpy = jest.spyOn(repo, 'findOneOrFail');
+    const repoSpy = jest.spyOn(repo, 'findOne');
     const user = await service.getOneById('121323dsafasdfjak');
     expect(user).toEqual(usersArray[1]);
     expect(repoSpy).toBeCalledWith({ id: '121323dsafasdfjak' });
   });
 
   it('getOneByName', async () => {
-    const repoSpy = jest.spyOn(repo, 'findOneOrFail');
+    const repoSpy = jest.spyOn(repo, 'findOne');
     const user = await service.getOneByName('username1');
     expect(user).toEqual(usersArray[1]);
     expect(repoSpy).toBeCalledWith({ username: 'username1' });

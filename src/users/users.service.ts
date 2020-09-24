@@ -16,11 +16,11 @@ export class UsersService {
   }
 
   async getOneById(id: string): Promise<User> {
-    return this.userRepo.findOneOrFail({ id });
+    return this.userRepo.findOne({ id });
   }
 
   async getOneByName(username: string): Promise<User> {
-    return this.userRepo.findOneOrFail({ username });
+    return this.userRepo.findOne({ username });
   }
 
   async insertOne(user: RegisterUserDto): Promise<User> {
