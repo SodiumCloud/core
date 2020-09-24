@@ -19,6 +19,7 @@ import { DatabaseType } from './common/constants/databases.enum';
       entities: ['dist/**/*.entity{.ts,.js}'],
       synchronize: process.env.DB_SYNC == 'true',
       keepConnectionAlive: true,
+      autoLoadEntities: true,
     }),
     AuthModule,
     UsersModule,
