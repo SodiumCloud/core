@@ -61,9 +61,9 @@ describe('UsersService', () => {
     expect(users).toEqual(usersArray);
   });
 
-  it('getOne', async () => {
+  it('getOneById', async () => {
     const repoSpy = jest.spyOn(repo, 'findOneOrFail');
-    const user = await service.getOne('121323dsafasdfjak');
+    const user = await service.getOneById('121323dsafasdfjak');
     expect(user).toEqual(usersArray[1]);
     expect(repoSpy).toBeCalledWith({ id: '121323dsafasdfjak' });
   });
