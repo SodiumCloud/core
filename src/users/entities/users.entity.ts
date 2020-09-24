@@ -11,9 +11,6 @@ export class User {
   id: string;
 
   @Column()
-  salt: string;
-
-  @Column()
   hash: string;
 
   @Column({ type: 'simple-enum', enum: RoleType, default: RoleType.USER })
