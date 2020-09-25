@@ -3,6 +3,7 @@ import { AuthService } from './auth.service';
 import { UsersService } from '../users/users.service';
 import { User } from '../users/entities/users.entity';
 import { RoleType } from '../common/constants/roles.enum';
+import { JwtService } from '@nestjs/jwt';
 
 const registeredUser: User = {
   id: 'daf2f22f2',
@@ -16,6 +17,7 @@ const registeredUser: User = {
 describe('AuthService', () => {
   let service: AuthService;
   let usersService: UsersService;
+  let jwtService: JwtService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -27,11 +29,22 @@ describe('AuthService', () => {
             getOneByName: jest.fn(),
           },
         },
+        {
+          provide: JwtService,
+          useValue: {
+            sign: jest
+              .fn()
+              .mockReturnValue(
+                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.afadfadfadf._adQssw5c',
+              ),
+          },
+        },
       ],
     }).compile();
 
     service = module.get<AuthService>(AuthService);
     usersService = module.get<UsersService>(UsersService);
+    jwtService = module.get<JwtService>(JwtService);
   });
 
   it('should be defined', () => {
@@ -70,6 +83,16 @@ describe('AuthService', () => {
       expect(isValid).toBeFalsy();
       expect(usersService.getOneByName).toBeCalledTimes(1);
       expect(usersService.getOneByName).toBeCalledWith(registeredUser.username);
+    });
+  });
+  describe('Login', () => {
+    it('should return jwt', async () => {
+      expect(await service.login(registeredUser)).toBeDefined();
+      expect(jwtService.sign).toBeCalledTimes(1);
+      expect(await service.login(registeredUser)).toEqual({
+        access_token:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.afadfadfadf._adQssw5c',
+      });
     });
   });
 });
