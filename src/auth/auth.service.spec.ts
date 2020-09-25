@@ -63,10 +63,12 @@ describe('AuthService', () => {
 
     it('should reject invalid username', async () => {
       jest.spyOn(usersService, 'getOneByName').mockResolvedValue(undefined);
-      const isValid = service.validateUser(registeredUser.username, 'password');
+      const isValid = await service.validateUser(
+        registeredUser.username,
+        'password',
+      );
 
-      await expect(isValid).rejects.toThrowError(BadRequestException);
-      await expect(isValid).rejects.toThrowError('User Not Found');
+      expect(isValid).toBeFalsy();
       expect(usersService.getOneByName).toBeCalledTimes(1);
       expect(usersService.getOneByName).toBeCalledWith(registeredUser.username);
     });
