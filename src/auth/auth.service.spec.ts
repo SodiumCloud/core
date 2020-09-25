@@ -3,6 +3,7 @@ import { AuthService } from './auth.service';
 import { UsersService } from '../users/users.service';
 import { User } from '../users/entities/users.entity';
 import { RoleType } from '../common/constants/roles.enum';
+import { BadRequestException } from '@nestjs/common';
 
 const registeredUser: User = {
   id: 'daf2f22f2',
@@ -62,9 +63,10 @@ describe('AuthService', () => {
 
     it('should reject invalid username', async () => {
       jest.spyOn(usersService, 'getOneByName').mockResolvedValue(undefined);
-      expect(
-        await service.validateUser(registeredUser.username, 'password'),
-      ).toBeFalsy();
+      const isValid = service.validateUser(registeredUser.username, 'password');
+
+      await expect(isValid).rejects.toThrowError(BadRequestException);
+      await expect(isValid).rejects.toThrowError('User Not Found');
       expect(usersService.getOneByName).toBeCalledTimes(1);
       expect(usersService.getOneByName).toBeCalledWith(registeredUser.username);
     });
