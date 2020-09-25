@@ -3,7 +3,6 @@ import { AuthService } from './auth.service';
 import { UsersService } from '../users/users.service';
 import { User } from '../users/entities/users.entity';
 import { RoleType } from '../common/constants/roles.enum';
-import { BadRequestException } from '@nestjs/common';
 
 const registeredUser: User = {
   id: 'daf2f22f2',
